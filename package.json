@@ -1,0 +1,17 @@
+{
+  "name": "file-transfer",
+  "version": "0.1.0",
+  "description": "File transfer app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": "",
+  "author": "Vasyl Priymachuk <activeobject.ac@gmail.com>",
+  "license": "BSD",
+  "dependencies": {
+    "uuid": "~1.4.1",
+    "express": "~3.3.1"
+  }
+}

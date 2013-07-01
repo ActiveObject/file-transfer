@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>File transfer app</title>
+	<link rel="stylesheet" href="css/app.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div id="prompt-box" class="prompt-box">
+		<span id="file-select" class="on-disk">выберете файл на диске</span>
+	</div>
+	<div id="file-box" class="file-box"></div>
+	<input type="file" id="file-input" style="display:none">
+
+	<script src="js/FileTransfer.js"></script>
+	<script src="js/app.js"></script>
+	<script>
+		window.onload = app.init;
+	</script>
+
+	<script id="file-box-tmpl" type="text/x-template">
+		Файл <span class="file-name">#{NAME}</span>
+		размером <span class="file-size">#{SIZE}</span>
+		доступный для загрузки по адресу:
+		<div class="file-url">#{URL}</div>
+	</script>
+</body>
+</html>
