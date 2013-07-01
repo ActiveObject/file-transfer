@@ -47,7 +47,6 @@ FilePipe.middleware = function (req, res, next) {
 
 FilePipe.prototype.subscribe = function (res) {
 	this.eventStreamResponse = res;
-	this.eventStreamResponse.socket.on('close', this.destroy.bind(this));
 };
 
 FilePipe.prototype.requestTransfer = function (res) {
