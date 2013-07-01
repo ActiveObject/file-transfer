@@ -57,6 +57,7 @@ FilePipe.prototype.requestTransfer = function (res) {
 
 FilePipe.prototype.sendFile = function (sourceRequest, callback) {
 	this.targetResponse.attachment(this.name);
+	this.targetResponse.set('Content-Length', this.size);
 
 	sourceRequest.on('error', function (err) {
 		callback(err);
