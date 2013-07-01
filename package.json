@@ -16,6 +16,7 @@
   "license": "BSD",
   "dependencies": {
     "uuid": "~1.4.1",
-    "express": "~3.3.1"
+    "express": "~3.3.1",
+    "multiparty": "~2.1.7"
   }
 }

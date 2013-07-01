@@ -1,5 +1,6 @@
 var uuid = require('uuid');
 var sse = require('app/sse');
+var multiparty = require('multiparty');
 
 var FilePipe = function (name, size) {
 	this.name = name;
@@ -59,15 +60,21 @@ FilePipe.prototype.sendFile = function (sourceRequest, callback) {
 	this.targetResponse.attachment(this.name);
 	this.targetResponse.set('Content-Length', this.size);
 
-	sourceRequest.on('error', function (err) {
+	var form = new multiparty.Form();
+	form.on('error', function (err) {
 		callback(err);
 	});
 
-	sourceRequest.on('end', function () {
+	form.on('close', function () {
 		callback(null);
 	});
 
-	sourceRequest.pipe(this.targetResponse);
+	form.on('part', function (part) {
+		part.pipe(this.targetResponse);
+	}.bind(this));
+
+	form.parse(sourceRequest);
+
 	return this;
 };
 
