@@ -34,6 +34,8 @@ var app = {
 				return console.error(err);
 			}
 
+			var progressBar = new UploadProgressView(transfer);
+			progressBar.appendTo(document.body);
 			boxEl.appendChild(app.renderTransferFile(file, transfer));
 		});
 	},

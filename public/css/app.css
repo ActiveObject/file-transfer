@@ -67,3 +67,31 @@ html, body {
 	font-size: 1.7em;
 	line-height: 2.2em;
 }
+
+.upload-progress-wrapper {
+	position: absolute;
+	bottom: 10%;
+	height: 10px;
+	width: 100%;
+	padding: 0 10%;
+}
+
+.upload-progress {
+	position: relative;
+	background-color: #333;
+	width: 0;
+	height: 100%;
+}
+
+.upload-progress-desc {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	top: -20%;
+	left: 50%;
+	margin-left: -40px;
+	font-size: 2em;
+	color: #555;
+	text-align: center;
+	line-height: 80px;
+}

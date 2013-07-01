@@ -12,11 +12,14 @@ var FileTransfer = function (file, url, esUrl) {
 	this.eventSource.addEventListener('connect', this.sendFile.bind(this), false);
 	this.eventSource.addEventListener('error', function (event) {
 		if (event.readyState === EventSource.CLOSED) {
-			console.log('transfer complete');
+			console.log('eventsource:closed');
 		} else {
 			this.error(event);
 		}
 	}.bind(this), false);
+
+	this.onfinish = function () {};
+	this.onprogress = function () {};
 };
 
 FileTransfer.create = function (file, callback) {
@@ -42,9 +45,23 @@ FileTransfer.create = function (file, callback) {
 FileTransfer.prototype.sendFile = function () {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', this.url);
-	xhr.onload = function (event) {
+
+	var onfinish = this.onfinish;
+	var onprogress = this.onprogress;
+
+	xhr.upload.addEventListener('progress', function (event) {
+		if (event.lengthComputable) {
+			var percentage = Math.round((event.loaded * 100) / event.total);
+			onprogress(percentage);
+		}
+	}, false);
+
+	xhr.upload.addEventListener('load', function (event) {
 		console.log('File %s has been successfully sent', this.file.name);
-	}.bind(this);
+		onprogress(100);
+		onfinish();
+	}.bind(this), false);
+
 	var formData = new FormData();
 	formData.append('file', this.file);
 	xhr.send(formData);
